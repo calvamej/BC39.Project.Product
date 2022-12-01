@@ -16,6 +16,7 @@ public class ProductEntity {
     @Id
     private String id;
     private String name;
+    private String productCode;
     private String productType;
     private double maintenanceCost;
     private int maxOperations;
