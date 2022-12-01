@@ -20,6 +20,7 @@ public class ProductEntity {
     private String productType;
     private double maintenanceCost;
     private int maxOperations;
+    private int operationDay;
     private Date createDate;
     private Date modifyDate;
 }
