@@ -18,8 +18,10 @@ public class ProductEntity {
     private String name;
     private String productCode;
     private String productType;
+    private double minimumOpeningAmount;
     private double maintenanceCost;
     private int maxOperations;
+    private int maxFreeOperations;
     private int operationDay;
     private Date createDate;
     private Date modifyDate;
