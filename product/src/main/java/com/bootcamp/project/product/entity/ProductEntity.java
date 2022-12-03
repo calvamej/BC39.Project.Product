@@ -20,6 +20,7 @@ public class ProductEntity {
     private String productType;
     private double minimumOpeningAmount;
     private double maintenanceCost;
+    private double minimumDailyAmount;
     private int maxOperations;
     private int maxFreeOperations;
     private int operationDay;
