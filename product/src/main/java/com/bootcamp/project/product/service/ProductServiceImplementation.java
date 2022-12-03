@@ -55,6 +55,7 @@ public class ProductServiceImplementation implements ProductService{
     }
     @Override
     public Mono<ProductEntity> register(ProductEntity colEnt) {
+        //register a product if name doesn't exist.
         return productRepository.findAll().filter(x -> x.getName().equals(colEnt.getName())).next()
                 .switchIfEmpty(productRepository.save(colEnt));
     }
