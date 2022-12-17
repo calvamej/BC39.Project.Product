@@ -22,18 +22,18 @@ public class ProductServiceImplementation implements ProductService{
         return productRepository.findAll().switchIfEmpty(Mono.error(new CustomNotFoundException("Products not found")));
     }
     @Override
-    public Mono<ProductEntity> getOne(String id) {
-        return productRepository.findAll().filter(x -> x.getId().equals(id)).next();
+    public Mono<ProductEntity> getOne(String productName) {
+        return productRepository.findAll().filter(x -> x.getProductName() != null && x.getProductName().equals(productName)).next();
     }
-
     @Override
     public Mono<ProductEntity> save(ProductEntity colEnt) {
+        colEnt.setCreateDate(new Date());
         return productRepository.save(colEnt);
     }
 
     @Override
-    public Mono<ProductEntity> update(String documentNumber, int maxOperations) {
-        return getOne(documentNumber).flatMap(c -> {
+    public Mono<ProductEntity> update(String productName, int maxOperations) {
+        return getOne(productName).flatMap(c -> {
             c.setMaxOperations(maxOperations);
             c.setModifyDate(new Date());
             return productRepository.save(c);
@@ -41,22 +41,27 @@ public class ProductServiceImplementation implements ProductService{
     }
 
     @Override
-    public Mono<Void> delete(String id) {
-        return getOne(id)
+    public Mono<Void> delete(String productName) {
+        return getOne(productName)
                 .switchIfEmpty(Mono.error(new CustomNotFoundException("Product not found")))
                 .flatMap(c -> {
                     return productRepository.delete(c);
                 });
     }
     @Override
-    public Mono<ProductEntity> findByName(String name) {
-        return productRepository.findAll().filter(x -> x.getName().equals(name)).next()
+    public Mono<ProductEntity> findByCode(String code) {
+        return productRepository.findAll().filter(x -> x.getProductCode() != null && x.getProductCode().equals(code)).next()
+                .switchIfEmpty(Mono.error(new CustomNotFoundException("Product not found")));
+    }
+    @Override
+    public Mono<ProductEntity> findByType(String type) {
+        return productRepository.findAll().filter(x -> x.getProductType() != null && x.getProductType().equals(type)).next()
                 .switchIfEmpty(Mono.error(new CustomNotFoundException("Product not found")));
     }
     @Override
     public Mono<ProductEntity> register(ProductEntity colEnt) {
-        //register a product if name doesn't exist.
-        return productRepository.findAll().filter(x -> x.getName().equals(colEnt.getName())).next()
+        colEnt.setCreateDate(new Date());
+        return productRepository.findAll().filter(x -> x.getProductCode() != null && x.getProductCode().equals(colEnt.getProductCode())).next()
                 .switchIfEmpty(productRepository.save(colEnt));
     }
 }

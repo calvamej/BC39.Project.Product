@@ -35,9 +35,13 @@ public class ProductController {
     public Mono<Void> Delete(@PathVariable("id") String id){
         return productService.delete(id);
     }
-    @GetMapping(value = "/FindByName/{name}")
-    public Mono<ProductEntity> findClientByDocument(@PathVariable("name") String name){
-        return productService.findByName(name);
+    @GetMapping(value = "/FindByCode/{code}")
+    public Mono<ProductEntity> findByCode(@PathVariable("code") String code){
+        return productService.findByCode(code);
+    }
+    @GetMapping(value = "/FindByType/{type}")
+    public Mono<ProductEntity> findByType(@PathVariable("type") String type){
+        return productService.findByType(type);
     }
     @PostMapping(value = "/Register")
     public Mono<ProductEntity> registerClient(@RequestBody ProductEntity col){

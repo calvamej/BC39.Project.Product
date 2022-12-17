@@ -1,5 +1,6 @@
 package com.bootcamp.project.product.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,8 @@ import java.util.Date;
 public class ProductEntity {
     @Id
     private String id;
-    private String name;
     private String productCode;
+    private String productName;
     private String productType;
     private double minimumOpeningAmount;
     private double maintenanceCost;
@@ -24,6 +25,8 @@ public class ProductEntity {
     private int maxOperations;
     private int maxFreeOperations;
     private int operationDay;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date createDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date modifyDate;
 }
