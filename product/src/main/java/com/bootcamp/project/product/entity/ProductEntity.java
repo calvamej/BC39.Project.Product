@@ -19,14 +19,16 @@ public class ProductEntity {
     private String productCode;
     private String productName;
     private String productType;
-    private double minimumOpeningAmount;
+    private double minimumOpeningBalance;
     private double maintenanceCost;
-    private double minimumDailyAmount;
-    private int maxOperations;
-    private int maxFreeOperations;
-    private int operationDay;
+    private double minimumDailyBalance;
+    private double commissionPercentage;
+    private int maxMonthlyOperations;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date createDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date modifyDate;
+
+
+
 }

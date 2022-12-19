@@ -13,9 +13,9 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping(value = "/FindOne/{id}")
-    public Mono<ProductEntity> Get_One(@PathVariable("id") String id){
-        return productService.getOne(id);
+    @GetMapping(value = "/FindOne/{productCode}")
+    public Mono<ProductEntity> Get_One(@PathVariable("productCode") String productCode){
+        return productService.getOne(productCode);
     }
     @GetMapping(value = "/FindAll")
     public Flux<ProductEntity> Get_All(){
@@ -27,20 +27,20 @@ public class ProductController {
 
         return productService.save(col);
     }
-    @PutMapping(value = "/Update/{id}/{maxOperations}")
-    public Mono<ProductEntity> Update(@PathVariable("id") String id,@PathVariable("maxOperations") int maxOperations){
-        return productService.update(id, maxOperations);
+    @PutMapping(value = "/Update/{productCode}/{maxOperations}")
+    public Mono<ProductEntity> Update(@PathVariable("productCode") String productCode,@PathVariable("maxOperations") int maxOperations){
+        return productService.update(productCode, maxOperations);
     }
-    @DeleteMapping  (value = "/Delete/{id}")
-    public Mono<Void> Delete(@PathVariable("id") String id){
-        return productService.delete(id);
+    @DeleteMapping  (value = "/Delete/{productCode}")
+    public Mono<Void> Delete(@PathVariable("productCode") String productCode){
+        return productService.delete(productCode);
     }
     @GetMapping(value = "/FindByCode/{code}")
     public Mono<ProductEntity> findByCode(@PathVariable("code") String code){
         return productService.findByCode(code);
     }
     @GetMapping(value = "/FindByType/{type}")
-    public Mono<ProductEntity> findByType(@PathVariable("type") String type){
+    public Flux<ProductEntity> findByType(@PathVariable("type") String type){
         return productService.findByType(type);
     }
     @PostMapping(value = "/Register")

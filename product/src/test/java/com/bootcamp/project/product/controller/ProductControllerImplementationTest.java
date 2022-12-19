@@ -61,10 +61,10 @@ public class ProductControllerImplementationTest {
     @Test
     public void getOne()
     {
-        ProductEntity OE = new ProductEntity(null,"AAA","BBB",null,0,0,0,0,0,0,null,null);
+        ProductEntity OE = new ProductEntity(null,"AAA","BBB",null,0,0,0,0,0,null,null);
         Mono<ProductEntity> MTest = Mono.just(OE);
         when(productService.getOne(any())).thenReturn(MTest);
-        Flux<ProductEntity> responseBody = webTestClient.get().uri("/Product/FindOne/BBB")
+        Flux<ProductEntity> responseBody = webTestClient.get().uri("/Product/FindOne/AAA")
                 .exchange()
                 .expectStatus().isOk()
                 .returnResult(ProductEntity.class)
@@ -72,14 +72,14 @@ public class ProductControllerImplementationTest {
 
         StepVerifier.create(responseBody)
                 .expectSubscription()
-                .expectNextMatches(p -> p.getProductName().equals("BBB"))
+                .expectNextMatches(p -> p.getProductName().equals("AAA"))
                 .verifyComplete();
     }
     @Test
     public void getAll()
     {
-        ProductEntity OE = new ProductEntity(null,"AAA","BBB",null,0,0,0,0,0,0,null,null);
-        ProductEntity OE2 = new ProductEntity(null,"BBB","CCC",null,0,0,0,0,0,0,null,null);
+        ProductEntity OE = new ProductEntity(null,"AAA","BBB",null,0,0,0,0,0,null,null);
+        ProductEntity OE2 = new ProductEntity(null,"BBB","CCC",null,0,0,0,0,0,null,null);
         Flux<ProductEntity> MTest = Flux.just(OE,OE2);
         when(productService.getAll()).thenReturn(MTest);
         Flux<ProductEntity> responseBody = webTestClient.get().uri("/Product/FindAll")
