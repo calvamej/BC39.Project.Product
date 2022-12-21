@@ -24,6 +24,8 @@ public class ProductEntity {
     private double minimumDailyBalance;
     private double commissionPercentage;
     private int maxMonthlyOperations;
+    private double purchaseRate;
+    private double saleRate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date createDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
