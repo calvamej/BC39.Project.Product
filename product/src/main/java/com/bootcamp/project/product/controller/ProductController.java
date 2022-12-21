@@ -47,4 +47,12 @@ public class ProductController {
     public Mono<ProductEntity> registerClient(@RequestBody ProductEntity col){
         return productService.register(col);
     }
+    @PutMapping(value = "/UpdateBootCoinPurchaseRate/{productCode}/{amount}")
+    public Mono<ProductEntity> updateBootCoinPurchaseRate(@PathVariable("productCode") String productCode,@PathVariable("amount") double amount){
+        return productService.updateBootCoinPurchaseRate(productCode, amount);
+    }
+    @PutMapping(value = "/UpdateBootCoinSaleRate/{productCode}/{amount}")
+    public Mono<ProductEntity> updateBootCoinSaleRate(@PathVariable("productCode") String productCode,@PathVariable("amount") double amount){
+        return productService.updateBootCoinSaleRate(productCode, amount);
+    }
 }

@@ -13,4 +13,6 @@ public interface ProductService {
     public Mono<ProductEntity> findByCode(String code);
     public Flux<ProductEntity> findByType(String type);
     public Mono<ProductEntity> register(ProductEntity colEnt);
+    public Mono<ProductEntity> updateBootCoinPurchaseRate(String productCode, double amount);
+    public Mono<ProductEntity> updateBootCoinSaleRate(String productCode, double amount);
 }

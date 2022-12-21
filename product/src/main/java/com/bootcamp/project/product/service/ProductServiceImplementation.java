@@ -64,4 +64,20 @@ public class ProductServiceImplementation implements ProductService{
         return productRepository.findAll().filter(x -> x.getProductCode() != null && x.getProductCode().equals(colEnt.getProductCode())).next()
                 .switchIfEmpty(productRepository.save(colEnt));
     }
+    @Override
+    public Mono<ProductEntity> updateBootCoinPurchaseRate(String productCode, double amount) {
+        return getOne(productCode).flatMap(c -> {
+            c.setPurchaseRate(amount);
+            c.setModifyDate(new Date());
+            return productRepository.save(c);
+        }).switchIfEmpty(Mono.error(new CustomNotFoundException("Product not found")));
+    }
+    @Override
+    public Mono<ProductEntity> updateBootCoinSaleRate(String productCode, double amount) {
+        return getOne(productCode).flatMap(c -> {
+            c.setSaleRate(amount);
+            c.setModifyDate(new Date());
+            return productRepository.save(c);
+        }).switchIfEmpty(Mono.error(new CustomNotFoundException("Product not found")));
+    }
 }
